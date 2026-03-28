@@ -129,13 +129,17 @@ function tick() {
   if(!ds) {
     document.getElementById("dayTypeLabel").textContent="Weekend";
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="Status";
-    document.getElementById("nowName").textContent="No school today";
-    document.getElementById("cdM").textContent="--";
-    document.getElementById("cdS").textContent="--";
+    document.getElementById("nowEyebrow").textContent="";
+    document.getElementById("nowName").textContent="Weekend";
+    const nextMon=new Date(now);
+    const daysUntilMon=(8-dow)%7;
+    nextMon.setDate(nextMon.getDate()+daysUntilMon);
+    nextMon.setHours(8,45,0,0);
+    const leftSec=Math.max(0,Math.floor((nextMon-now)/1000));
+    renderCD(leftSec,COLORS.free);
     document.getElementById("spanStart").textContent="–";
-    document.getElementById("spanEnd").textContent="Enjoy your weekend";
-    document.getElementById("progFill").style.width="100%";
+    document.getElementById("spanEnd").textContent="School resumes Monday";
+    document.getElementById("progFill").style.width="0%";
     document.getElementById("nextRow").style.display="none";
     if(lastKey!=="wknd"){document.getElementById("schedList").innerHTML="";lastKey="wknd";}
     return;
