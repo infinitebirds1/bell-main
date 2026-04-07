@@ -121,7 +121,6 @@ function tick() {
   const curMin=now.getHours()*60+now.getMinutes();
   const curSec=curMin*60+now.getSeconds();
 
-  document.getElementById("dayBadge").textContent=DAYNAMES[dow];
   document.getElementById("liveTime").textContent=fmtClock(now);
 
   const ds=getDaySched(dow);
