@@ -29,7 +29,7 @@ const SCHEDULES = {
     ]
   },
   tuethu: {
-    label: "Tue / Thu",
+    label: "Odd Block",
     periods: [
       { name: "Period 1",        start: "08:45", end: "10:15", type: "class"   },
       { name: "Passing",         start: "10:15", end: "10:25", type: "passing" },
@@ -42,7 +42,7 @@ const SCHEDULES = {
     ]
   },
   wedfri: {
-    label: "Wed / Fri",
+    label: "Even Block",
     periods: [
       { name: "Period 2",        start: "08:45", end: "10:15", type: "class"   },
       { name: "Passing",         start: "10:15", end: "10:25", type: "passing" },
