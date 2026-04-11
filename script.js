@@ -206,7 +206,7 @@ function tick() {
 
   if(nextIdx>=0){
     const np=periods[nextIdx];
-    document.getElementById("nextRow").style.display="";
+    document.getElementById("nextRow").styile.display="";
     document.getElementById("nextName").textContent=np.name;
     document.getElementById("nextTime").textContent=fmtTime(np.startMin);
   } else {
