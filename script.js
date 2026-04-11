@@ -191,6 +191,17 @@ function tick() {
     const left=schoolStart*60-curSec;
     renderCD(left,COLORS.free);
     document.getElementById("progFill").style.width="100%";
+  } else {
+    setAccent(COLORS.free);
+    document.getElementById("nowEyebrow").textContent="";
+    document.getElementById("nowName").textContent="Free";
+    document.getElementById("spanStart").textContent="";
+    document.getElementById("spanEnd").textContent="";
+    document.getElementById("cdH").style.display="none";
+    document.getElementById("cdSepH").style.display="none";
+    document.getElementById("cdM").textContent="--";
+    document.getElementById("cdS").textContent="--";
+    document.getElementById("progFill").style.width="100%";
   }
 
   if(nextIdx>=0){
