@@ -44,7 +44,7 @@
 
   .live-time {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     color: var(--text-3);
     letter-spacing: 0.06em;
   }

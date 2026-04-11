@@ -66,8 +66,6 @@ function fmtClock(d) {
   const h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ap=h>=12?"PM":"AM",hh=h%12||12;
   return `${hh}:${pad(m)}:${pad(s)} ${ap}`;
 }
-const DAYNAMES=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
 function getDaySched(dow) {
   if (dow===1) return {key:"monday",...SCHEDULES.monday};
   if (dow===2||dow===4) return {key:"tuethu",...SCHEDULES.tuethu};
@@ -126,10 +124,10 @@ function tick() {
   const ds=getDaySched(dow);
 
   if(!ds) {
-    document.getElementById("dayTypeLabel").textContent="Weekend";
+    document.getElementById("dayTypeLabel").textContent="Free";
     setAccent(COLORS.free);
     document.getElementById("nowEyebrow").textContent="";
-    document.getElementById("nowName").textContent="Weekend";
+    document.getElementById("nowName").textContent="Free";
     const nextMon=new Date(now);
     const daysUntilMon=(8-dow)%7;
     nextMon.setDate(nextMon.getDate()+daysUntilMon);
