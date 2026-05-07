@@ -87,7 +87,7 @@ function buildList(sched) {
     let tag="";
     if(p.type==="passing") tag=`<span class="type-tag">passing</span>`;
     else if(p.type==="lunch") tag=`<span class="type-tag">lunch</span>`;
-    else if(p.type==="ann") tag=`<span class="type-tag">ann</span>`;
+    else if(p.type==="ann") tag=`<span class="type-tag"></span>`;
     else if(p.type==="ssr") tag=`<span class="type-tag">ssr</span>`;
     div.innerHTML=`
       <div class="sched-pip"></div>
@@ -175,7 +175,6 @@ function tick() {
   if(activeIdx>=0){
     const p=periods[activeIdx];
     setAccent(p.color);
-    document.getElementById("nowEyebrow").textContent="Now";
     document.getElementById("nowName").textContent=p.name;
     document.getElementById("spanStart").textContent=fmtTime(p.startMin);
     document.getElementById("spanEnd").textContent=fmtTime(p.endMin);
@@ -184,7 +183,6 @@ function tick() {
     document.getElementById("progFill").style.width=`${Math.min(100,((total-left)/total)*100)}%`;
   } else if(curMin<schoolStart){
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="Before school";
     document.getElementById("nowName").textContent="Free";
     document.getElementById("spanStart").textContent="–";
     document.getElementById("spanEnd").textContent=`School starts ${fmtTime(schoolStart)}`;
@@ -193,7 +191,6 @@ function tick() {
     document.getElementById("progFill").style.width="100%";
   } else {
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="";
     document.getElementById("nowName").textContent="Free";
     document.getElementById("spanStart").textContent="";
     document.getElementById("spanEnd").textContent="";
@@ -206,7 +203,7 @@ function tick() {
 
   if(nextIdx>=0){
     const np=periods[nextIdx];
-    document.getElementById("nextRow").styile.display="";
+    document.getElementById("nextRow").style.display="";
     document.getElementById("nextName").textContent=np.name;
     document.getElementById("nextTime").textContent=fmtTime(np.startMin);
   } else {
