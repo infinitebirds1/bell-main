@@ -117,7 +117,7 @@ function tick() {
   const now=new Date();
   const dow=now.getDay();
   const curMin=now.getHours()*60+now.getMinutes();
-  const curSec=curMin*60+now.getSeconds();
+const curSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
 
   document.getElementById("liveTime").textContent=fmtClock(now);
 
