@@ -98,7 +98,6 @@ function buildList(sched) {
 }
 
 function setAccent(color) {
-  document.getElementById("pulseDot").style.background=color;
   document.querySelectorAll(".cd-num").forEach(e=>e.style.color=color);
   document.getElementById("progFill").style.background=color;
 }
