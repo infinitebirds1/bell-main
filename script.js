@@ -130,11 +130,11 @@ function tick() {
     document.getElementById("dayTypeLabel").textContent="Weekend";
     setAccent(COLORS.free);
     document.getElementById("nowEyebrow").textContent="Status";
-    document.getElementById("nowName").textContent="No school today";
+    document.getElementById("nowName").textContent="No school";
     document.getElementById("cdM").textContent="--";
     document.getElementById("cdS").textContent="--";
     document.getElementById("spanStart").textContent="–";
-    document.getElementById("spanEnd").textContent="Enjoy your weekend";
+    document.getElementById("spanEnd").textContent="";
     document.getElementById("progFill").style.width="100%";
     document.getElementById("nextRow").style.display="none";
     if(lastKey!=="wknd"){document.getElementById("schedList").innerHTML="";lastKey="wknd";}
@@ -174,7 +174,7 @@ function tick() {
   if(activeIdx>=0){
     const p=periods[activeIdx];
     setAccent(p.color);
-    document.getElementById("nowEyebrow").textContent="Now";
+    document.getElementById("nowEyebrow").textContent="";
     document.getElementById("nowName").textContent=p.name;
     document.getElementById("spanStart").textContent=fmtTime(p.startMin);
     document.getElementById("spanEnd").textContent=fmtTime(p.endMin);
