@@ -29,7 +29,7 @@ const SCHEDULES = {
     ]
   },
   tuethu: {
-    label: "Odd Block",
+    label: "Tue / Thu",
     periods: [
       { name: "Period 1",        start: "08:45", end: "10:15", type: "class"   },
       { name: "Passing",         start: "10:15", end: "10:25", type: "passing" },
@@ -42,7 +42,7 @@ const SCHEDULES = {
     ]
   },
   wedfri: {
-    label: "Even Block",
+    label: "Wed / Fri",
     periods: [
       { name: "Period 2",        start: "08:45", end: "10:15", type: "class"   },
       { name: "Passing",         start: "10:15", end: "10:25", type: "passing" },
@@ -66,6 +66,8 @@ function fmtClock(d) {
   const h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ap=h>=12?"PM":"AM",hh=h%12||12;
   return `${hh}:${pad(m)}:${pad(s)} ${ap}`;
 }
+const DAYNAMES=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
 function getDaySched(dow) {
   if (dow===1) return {key:"monday",...SCHEDULES.monday};
   if (dow===2||dow===4) return {key:"tuethu",...SCHEDULES.tuethu};
@@ -87,7 +89,7 @@ function buildList(sched) {
     let tag="";
     if(p.type==="passing") tag=`<span class="type-tag">passing</span>`;
     else if(p.type==="lunch") tag=`<span class="type-tag">lunch</span>`;
-    else if(p.type==="ann") tag=`<span class="type-tag"></span>`;
+    else if(p.type==="ann") tag=`<span class="type-tag">ann</span>`;
     else if(p.type==="ssr") tag=`<span class="type-tag">ssr</span>`;
     div.innerHTML=`
       <div class="sched-pip"></div>
@@ -98,6 +100,7 @@ function buildList(sched) {
 }
 
 function setAccent(color) {
+  document.getElementById("pulseDot").style.background=color;
   document.querySelectorAll(".cd-num").forEach(e=>e.style.color=color);
   document.getElementById("progFill").style.background=color;
 }
@@ -116,26 +119,23 @@ function tick() {
   const now=new Date();
   const dow=now.getDay();
   const curMin=now.getHours()*60+now.getMinutes();
-const curSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  const curSec=curMin*60+now.getSeconds();
 
+  document.getElementById("dayBadge").textContent=DAYNAMES[dow];
   document.getElementById("liveTime").textContent=fmtClock(now);
 
   const ds=getDaySched(dow);
 
   if(!ds) {
-    document.getElementById("dayTypeLabel").textContent="Free";
+    document.getElementById("dayTypeLabel").textContent="Weekend";
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="";
-    document.getElementById("nowName").textContent="Free";
-    const nextMon=new Date(now);
-    const daysUntilMon=(8-dow)%7;
-    nextMon.setDate(nextMon.getDate()+daysUntilMon);
-    nextMon.setHours(8,45,0,0);
-    const leftSec=Math.max(0,Math.floor((nextMon-now)/1000));
-    renderCD(leftSec,COLORS.free);
+    document.getElementById("nowEyebrow").textContent="Status";
+    document.getElementById("nowName").textContent="No school today";
+    document.getElementById("cdM").textContent="--";
+    document.getElementById("cdS").textContent="--";
     document.getElementById("spanStart").textContent="–";
-    document.getElementById("spanEnd").textContent="School resumes Monday";
-    document.getElementById("progFill").style.width="0%";
+    document.getElementById("spanEnd").textContent="Enjoy your weekend";
+    document.getElementById("progFill").style.width="100%";
     document.getElementById("nextRow").style.display="none";
     if(lastKey!=="wknd"){document.getElementById("schedList").innerHTML="";lastKey="wknd";}
     return;
@@ -174,6 +174,7 @@ const curSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
   if(activeIdx>=0){
     const p=periods[activeIdx];
     setAccent(p.color);
+    document.getElementById("nowEyebrow").textContent="Now";
     document.getElementById("nowName").textContent=p.name;
     document.getElementById("spanStart").textContent=fmtTime(p.startMin);
     document.getElementById("spanEnd").textContent=fmtTime(p.endMin);
@@ -182,6 +183,7 @@ const curSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
     document.getElementById("progFill").style.width=`${Math.min(100,((total-left)/total)*100)}%`;
   } else if(curMin<schoolStart){
     setAccent(COLORS.free);
+    document.getElementById("nowEyebrow").textContent="Before school";
     document.getElementById("nowName").textContent="Free";
     document.getElementById("spanStart").textContent="–";
     document.getElementById("spanEnd").textContent=`School starts ${fmtTime(schoolStart)}`;
@@ -190,9 +192,10 @@ const curSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
     document.getElementById("progFill").style.width="100%";
   } else {
     setAccent(COLORS.free);
+    document.getElementById("nowEyebrow").textContent="After school";
     document.getElementById("nowName").textContent="Free";
-    document.getElementById("spanStart").textContent="";
-    document.getElementById("spanEnd").textContent="";
+    document.getElementById("spanStart").textContent="–";
+    document.getElementById("spanEnd").textContent="Done for today";
     document.getElementById("cdH").style.display="none";
     document.getElementById("cdSepH").style.display="none";
     document.getElementById("cdM").textContent="--";
