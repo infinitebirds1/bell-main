@@ -228,8 +228,8 @@
   .sched-item.past { opacity: 0.28; }
 
   .sched-pip {
-    width: 5px;
-    height: 5px;
+    width: 0px;
+    height: 0px;
     border-radius: 50%;
     flex-shrink: 0;
     background: var(--item-color, var(--border));
