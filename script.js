@@ -183,19 +183,19 @@ function tick() {
     document.getElementById("progFill").style.width=`${Math.min(100,((total-left)/total)*100)}%`;
   } else if(curMin<schoolStart){
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="Before school";
+    document.getElementById("nowEyebrow").textContent="";
     document.getElementById("nowName").textContent="Free";
     document.getElementById("spanStart").textContent="–";
-    document.getElementById("spanEnd").textContent=`School starts ${fmtTime(schoolStart)}`;
+    document.getElementById("spanEnd").textContent="";
     const left=schoolStart*60-curSec;
     renderCD(left,COLORS.free);
     document.getElementById("progFill").style.width="100%";
   } else {
     setAccent(COLORS.free);
-    document.getElementById("nowEyebrow").textContent="After school";
+    document.getElementById("nowEyebrow").textContent="";
     document.getElementById("nowName").textContent="Free";
     document.getElementById("spanStart").textContent="–";
-    document.getElementById("spanEnd").textContent="Done for today";
+    document.getElementById("spanEnd").textContent="";
     document.getElementById("cdH").style.display="none";
     document.getElementById("cdSepH").style.display="none";
     document.getElementById("cdM").textContent="--";
