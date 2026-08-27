@@ -88,7 +88,7 @@ function buildList(sched) {
     div.style.setProperty("--item-color",color);
     let tag="";
     if(p.type==="passing") tag=`<span class="type-tag">passing</span>`;
-    else if(p.type==="lunch") tag=`<span class="type-tag">lunch</span>`;
+    else if(p.type==="lunch") tag=`<span class="type-tag"></span>`;
     else if(p.type==="ann") tag=`<span class="type-tag">ann</span>`;
     else if(p.type==="ssr") tag=`<span class="type-tag">ssr</span>`;
     div.innerHTML=`
