@@ -115,6 +115,12 @@ function renderCD(left, color) {
   document.querySelectorAll(".cd-num").forEach(e=>e.style.color=color);
 }
 
+function updateTitle(left, periodName) {
+  const mins = Math.floor(left / 60);
+  const secs = left % 60;
+  document.title = `${mins}:${pad(secs)} | ${periodName}`;
+}
+
 function tick() {
   const now=new Date();
   const dow=now.getDay();
@@ -180,6 +186,7 @@ function tick() {
     document.getElementById("spanEnd").textContent=fmtTime(p.endMin);
     const left=p.endMin*60-curSec,total=(p.endMin-p.startMin)*60;
     renderCD(left,p.color);
+    updateTitle(left, p.name);
     document.getElementById("progFill").style.width=`${Math.min(100,((total-left)/total)*100)}%`;
   } else if(curMin<schoolStart){
     setAccent(COLORS.free);
